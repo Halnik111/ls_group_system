@@ -53,10 +53,10 @@ const Sidebar = () => {
                     {i.items.map(item => {
                         if (item.visible.includes(role)) {
                             return (
-                                <li className={`pl-3 hover:font-bold ${activePage === item.href ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
+                                <div className={`pl-3 hover:font-bold ${activePage === item.href ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
                                     navigate(item.href);
                                     setActivePage(item.href);
-                                }}>{item.label}</li>
+                                }}>{item.label}</div>
                             )
                         }
                     })}
