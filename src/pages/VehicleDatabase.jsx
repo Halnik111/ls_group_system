@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Vehicle = () => {
+const VehicleDatabase = () => {
     return (
-        <div className={''}>
+        <div className={'text-white'}>
             Databaza vozidel
         </div>
     );
 };
 
-export default Vehicle;
+export default VehicleDatabase;
