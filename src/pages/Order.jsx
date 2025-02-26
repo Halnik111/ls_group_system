@@ -142,7 +142,7 @@ const Order = () => {
                     </div>
                     <div className={'rounded-lg border py-1 px-2'}>+ Nová..</div>
                 </div>
-                <div className={'h-full overflow-y-scroll rounded-lg flex flex-col gap-4'}>
+                <div className={'h-[calc(100%-64px)] box-border overflow-y-scroll rounded-lg flex flex-col gap-4'}>
                     {orders.map(order => (
                         <div className={`bg-gray-800 rounded-lg p-2 flex justify-between hover:border hover:border-white hover:p-[calc(0.5rem-1px)] ${work.id === order.id ? 'text-red-200 border p-[calc(0.5rem-1px)] border-white' : ''}`} key={order.id} onClick={() => setWork(order)}>
                             <div className={''}>
