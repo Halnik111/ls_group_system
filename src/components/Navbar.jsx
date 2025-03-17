@@ -3,7 +3,7 @@ import React from 'react';
 const Navbar = () => {
     return (
         <div className={"flex w-full  text-lg p-2 md:p-4 items-center justify-start bg-gray-800"}>
-            <div className={'block md:hidden'}>
+            <div className={'block md:hidden cursor-pointer'}>
                 LS-G
             </div>
             <div className={'ml-6 mr-auto flex items-center gap-2 text-sm rounded-full ring-[1.5px] ring-white px-2'}>

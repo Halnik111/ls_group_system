@@ -14,7 +14,7 @@ const menuItems = [
             {
                 icon: "/open_orders.png",
                 label: "Otvorené Zákazky",
-                href: "/carOrder",
+                href: "/carWork",
                 visible: ["admin", "user"],
             },
             {
@@ -53,7 +53,7 @@ const Sidebar = () => {
                     {i.items.map(item => {
                         if (item.visible.includes(role)) {
                             return (
-                                <div className={`pl-3 hover:font-bold ${activePage === item.href ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
+                                <div className={`pl-3 cursor-pointer hover:font-bold ${activePage === item.href ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
                                     navigate(item.href);
                                     setActivePage(item.href);
                                 }}>{item.label}</div>

@@ -3,15 +3,15 @@ import {HashRouter, Route, Routes} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Sidebar from "./components/Sidebar";
-import Order from "./pages/Order";
 import VehicleDatabase from "./pages/VehicleDatabase";
+import Work from "./pages/Work";
 
 function App() {
   return (
       <HashRouter>
         <div className={'h-screen flex overflow-hidden font-inter'}>
             <div className={'hidden w-1/6 md:flex flex-col gap-2 bg-gray-800 text-white'}>
-                <div className={'hidden md:flex justify-center lg:block text-xl font-bold bg-red-100 text-black p-4'}>
+                <div className={'hidden md:flex cursor-pointer justify-center lg:block text-xl font-bold bg-red-100 text-black p-4'}>
                     LS-Group
                 </div>
                 <Sidebar />
@@ -21,7 +21,7 @@ function App() {
                 <Routes>
                     <Route path={'/'}>
                         <Route index element={<Home />}/>
-                        <Route path={'carOrder'} element={<Order />}/>
+                        <Route path={'carWork'} element={<Work />}/>
                         <Route path={'car_database'} element={<VehicleDatabase />}/>
                     </Route>
                 </Routes>

@@ -11,7 +11,7 @@ const Home = () => {
             const formData = new FormData();
             formData.append('files', compressedImage, inputFiles.name);
             
-            fetch("http://localhost:3001/imageRead/upload", {
+            fetch("http://localhost:3001/api/upload", {
                 method: 'POST',
                 body: formData
             })
