@@ -1,6 +1,5 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer } from 'react';
 import apiReq from "../apiReq";
-import {useNavigate} from "react-router-dom";
 
 export const AuthContext = createContext();
 

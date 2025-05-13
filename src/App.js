@@ -7,6 +7,8 @@ import Work from "./pages/Work";
 import HistoryDatabase from "./pages/HistoryDatabse";
 import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./ProtectedRoute";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
     return (
@@ -23,11 +25,14 @@ function App() {
                         <Navbar />
                         <Routes>
                             <Route path={'/'}>
-                                <Route index element={<Home />}/>
-                                <Route path={'carWork'} element={<Work />}/>
-                                <Route path={'database'} element={<HistoryDatabase />}/>
+                                <Route element={<ProtectedRoute allowedRoutes={['user', 'admin']}/>}>
+                                    <Route index element={<Home />}/>
+                                    <Route path={'carWork'} element={<Work />}/>
+                                    <Route path={'database'} element={<HistoryDatabase />}/>
+                                </Route>
                                 <Route path={'login'} element={<Login />}/>
                                 <Route path={'logout'} element={<Login signOut={true}/>}/>
+                                <Route path={'/unauthorized'} element={<Unauthorized />}/>
                             </Route>
                         </Routes>
                     </div>

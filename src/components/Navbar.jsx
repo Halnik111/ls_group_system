@@ -16,7 +16,12 @@ const Navbar = () => {
                 <input type={'text'} placeholder={'Hladať...'} className={'border-none bg-transparent w-[200px] p-2 outline-none'}/>
             </div>
             <div className={'flex gap-4'}>
-                {user?.username ? (<div className={''}>admin</div>) 
+                {user?.username ? (
+                    <div className={'flex flex-col items-end mx-2'}>
+                        <div className={'text-lg text-red-200 font-bold'}>{user.username}</div>
+                        <div className={'text-sm font-bold text-gray-400'}>{user.role}</div>
+                    </div>
+                    ) 
                     : 
                     (
                     <div className={'cursor-pointer border-b px-1 text-red-200 font-bold'}
