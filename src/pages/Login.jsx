@@ -39,7 +39,6 @@ const Login = ( {signOut} ) => {
                 .then(result => {
                     if (result.success === true) {
                         navigate('/');
-                        console.log(result)
                     }
                 })
         }

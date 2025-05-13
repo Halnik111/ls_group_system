@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
 
 function App() {
+    
     return (
         <AuthProvider>
             <HashRouter>

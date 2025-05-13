@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, {createContext, useEffect, useReducer} from 'react';
 import apiReq from "../apiReq";
 
 export const AuthContext = createContext();
@@ -7,7 +7,7 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     token: null,
-    loading: false,
+    loading: true,
     error: null,
 };
 
@@ -30,7 +30,10 @@ function authReducer(state, action) {
                 error: action.payload,
             };
         case 'LOGOUT':
-            return initialState;
+            return {
+                ...initialState,
+              loading: false  
+            };
         default:
             return state;
     }
@@ -39,13 +42,19 @@ function authReducer(state, action) {
 export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem('authToken');
-    //     const user = JSON.parse(localStorage.getItem('authUser'));
-    //     if (token && user) {
-    //         dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
-    //     }
-    // }, []);
+    useEffect(() => {
+        console.log('run')
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
+        try {
+            if (token && user) {
+                dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
+            }
+        } catch {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+        }
+    }, []);
 
     const login = async (username, password) => {
         dispatch({ type: 'LOGIN_REQUEST' });
@@ -65,6 +74,7 @@ export const AuthProvider = ({ children }) => {
             const { user, token } = data;
 
             localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
 
             dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
             return { success: true, user };
@@ -95,7 +105,8 @@ export const AuthProvider = ({ children }) => {
                 throw new Error('Invalid response from server');
             }
 
-            localStorage.setItem('authToken', token);
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user.username));
 
             dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
             return { success: true, user };
@@ -107,6 +118,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         dispatch({ type: 'LOGOUT' });
     };
     
