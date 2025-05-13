@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const menuItems = [
     {
@@ -18,9 +18,9 @@ const menuItems = [
                 visible: ["admin", "user"],
             },
             {
-                icon: "/car_database.png",
-                label: "Vozidlá",
-                href: "/car_database",
+                icon: "/database.png",
+                label: "Databáza",
+                href: "/database",
                 visible: ["admin", "user"],
             }
         ]
@@ -42,27 +42,27 @@ const menuItems = [
 const Sidebar = () => {
     const role = 'admin';
     const navigate = useNavigate();
-    const [activePage, setActivePage] = useState('home');
+    const location = useLocation();
     
     
     return (
         <div className={'hidden md:flex gap-4  h-full flex-col p-2'}>
-            {menuItems.map(i => (
-                <ul className={'gap-1 flex flex-col'} key={i.title}>
-                    <span className={'text-lg font-bold'}>{i.title}</span>
-                    {i.items.map(item => {
-                        if (item.visible.includes(role)) {
-                            return (
-                                <div className={`pl-3 cursor-pointer hover:font-bold ${activePage === item.href ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
-                                    navigate(item.href);
-                                    setActivePage(item.href);
-                                }}>{item.label}</div>
-                            )
-                        }
-                    })}
-                </ul>
-            ))}
-        </div>
+    {menuItems.map(i => (
+        <ul className={'gap-1 flex flex-col'} key={i.title}>
+            <span className={'text-lg font-bold'}>{i.title}</span>
+            {i.items.map(item => {
+                if (item.visible.includes(role)) {
+                    const isActive = location.pathname === item.href;
+                    return (
+                        <div className={`pl-3 cursor-pointer hover:font-bold ${isActive ? 'text-red-200 font-bold' : ''}`} key={item.label} onClick={() => {
+                            navigate(item.href);
+                        }}>{item.label}</div>
+                    )
+                }
+            })}
+        </ul>
+    ))}
+</div>
     );
 };
 

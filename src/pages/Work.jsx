@@ -122,16 +122,18 @@ const Work = () => {
     const [searchOrderInput, setSearchOrderInput] = useState('');
     const navigate = useNavigate();
     
-    
-    useEffect(() => {
-        fetchWork();
-    },);
-    
-    const fetchWork = () => {
-        apiReq.get('/work/getAll')
-            .then(res => setWork(res.data))
-            .catch(() => navigate('/'));
-    }
+ useEffect(() => {
+    //fetchWork();
+}, []); 
+
+const fetchWork = () => {
+    apiReq.get('/work/getAllActive')
+        .then(res => setWork(res.data))
+        .catch(err => {
+            console.error('Failed to fetch work:', err); 
+            navigate('/'); 
+        });
+};
     
     return (
         <div className={'w-full flex gap-4 p-2'}>
@@ -152,7 +154,7 @@ const Work = () => {
                             <img src={'./close.png'} alt={''} width={14} height={14} className={'w-4 h-4'} onClick={() => setSearchOrderInput('')}/>
                         }
                     </div>
-                    <div className={'rounded-lg border py-1 px-2 cursor-pointer'}>+ Nová..</div>
+                    <div className={'rounded-lg border py-1 px-2 cursor-pointer hover:text-red-200 hover:border-red-200'}>+ Nová..</div>
                 </div>
                 <div className={'h-[calc(100%-64px)] box-border overflow-y-scroll rounded-lg flex flex-col gap-4'}>
                     {work.map(work => (
@@ -178,7 +180,7 @@ const Work = () => {
                     <div className={'flex items-center p-4 justify-between'}>
                         <div className={'py-2 px-3'}>Otvoril: {selectedWork.opened_by}</div>
                         <div className={'font-bold text-xl'}>{selectedWork.plate} + {selectedWork.id}</div>
-                        <div className={'rounded-md border py-2 px-3 cursor-pointer'}>+ Material</div>
+                        <div className={'rounded-md border py-2 px-3 cursor-pointer hover:text-red-200 hover:border-red-200'}>+ Material</div>
                     </div>
                 ) : (
                     <div className={'flex p-4 items-center justify-center text-lg'}>
